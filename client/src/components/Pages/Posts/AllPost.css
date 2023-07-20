@@ -1,0 +1,11 @@
+.upload-post-div {
+    display: inline;
+    float: right;
+}
+
+@media (max-width : 320px) {
+    .user-submit-btn {
+        padding: 14px 4px;
+        font-size: 10px;
+    }
+}

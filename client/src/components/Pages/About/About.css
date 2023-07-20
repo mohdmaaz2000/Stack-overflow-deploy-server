@@ -1,0 +1,25 @@
+
+.about-heading {
+    margin-top: 20px;
+    font-weight: 500;
+}
+.about-para, .about-list {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+}
+.about-list {
+    padding-left: 20px;
+}
+.about-col{
+    background-color: #fdf7e2;;
+    border: 1px solid #f1e5bc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 0px 30px;
+    margin-top: 50px;
+    border-radius: 5px;
+}
+.about-list li{
+    margin: 5px;
+    padding: 5px;
+}

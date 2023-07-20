@@ -1,0 +1,27 @@
+.post-container-header .profile-ask-btn{
+    padding: 10px 15px;
+    border-radius: 4px;
+    background-color: #009dff;
+    color: white;
+    border: none;
+    text-decoration: none;
+    transition: 0.4s;
+    cursor: pointer;
+    float: right;
+}
+.post-container-header .profile-ask-btn:hover{
+    background-color: #0086d8;
+}
+.post-container-header h1{
+    font-weight: 400;
+}
+
+@media screen and (max-width:350px) {
+    .post-container-header h1{
+        text-align: left;
+    }
+    .post-container-header .profile-ask-btn{
+        padding: 8px;
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,175 @@
+.post-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.post-container-header {
+    text-align: center;
+}
+
+.post-container-content {
+    margin-top: 30px;
+}
+
+.user-post-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    margin-right: 10px;
+}
+
+.user-post-info img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-post-details h2 {
+    margin: 0;
+}
+
+.user-post-details p {
+    margin: 0;
+    color: #999;
+}
+
+.post {
+    margin-top: 20px;
+}
+
+.post p {
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.post-image,
+.post-video {
+    height: 400px;
+    width: 90%;
+}
+/* .no-post-found{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+    font-size: ;
+} */
+.like-comment {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 25px;
+}
+
+.like-section, .comment-section, .share-section, .delete-section {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+}
+
+.like-image-ico {
+    width: 22px;
+}
+.delete-image-ico{
+    width: 15px;
+}
+
+.like-section button, .comment-section button {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.like-section span, .comment-section span,.delete-section span,.share-section span {
+    cursor: pointer;
+    color: #999;
+}
+
+@media (max-width:1000px) {
+
+    .post-image,
+    .post-video {
+        height: 350px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .post-image,
+    .post-video {
+        height: 250px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    .post-container {
+        padding: 10px;
+    }
+
+    .post-image,
+    .post-video {
+        height: 220px;
+        width: 90%;
+    }
+
+    .user-info img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-details h2 {
+        font-size: 20px;
+    }
+
+    .post p {
+        font-size: 16px;
+    }
+
+    .like-comment {
+        margin-top: 5px;
+    }
+
+    .like button {
+        font-size: 14px;
+    }
+
+    .like span {
+        font-size: 14px;
+    }
+    .like-image-ico {
+        width: 17px;
+    }
+    .delete-image-ico{
+        width: 12px;
+    }
+    .like-section span, .comment-section span,.delete-section span,.share-section span{
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 425px)
+{
+    .like-comment{
+        margin-top: 3px;
+    }
+    .like-image-ico {
+        width: 15px;
+    }
+    .delete-image-ico{
+        width: 10px;
+    }
+    .like-section span, .comment-section span,.delete-section span,.share-section span{
+        font-size: 11px;
+    }
+}

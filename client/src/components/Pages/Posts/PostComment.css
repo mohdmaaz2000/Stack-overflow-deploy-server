@@ -1,0 +1,142 @@
+.like-comment-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.comment {
+    margin-top: 20px;
+}
+
+.no-comment {
+    margin: 5px 2px;
+    padding: 4px;
+    color: #999;
+}
+
+.comment h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.comment ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.comment li {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.comment li img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.comment-details h4 {
+    margin: 0;
+}
+
+.comment-details p {
+    margin: 0;
+    color: #746767;
+}
+
+.delete-post-btn{
+    background-color: transparent;
+    border: none;
+    padding: 5px 0px;
+    margin: 0px 10px 0px 0px;
+    text-decoration: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.comment form {
+    margin-top: 20px;
+    display: flex;
+}
+
+.comment input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 0.5px solid black;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.comment-time {
+    color: #999;
+    font-size: 13px;
+}
+
+.comment button[type="submit"] {
+    padding: 14px 10px;
+    background-color: #0095ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.comment button[type="submit"]:hover{
+    background-color: #0086d8;
+}
+
+@media (max-width: 600px) {
+    .comment h3 {
+        font-size: 18px;
+    }
+
+    .comment li img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .comment-details h4 {
+        font-size: 16px;
+    }
+
+    .comment-details p {
+        font-size: 14px;
+    }
+
+    .comment input[type="text"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .comment button[type="submit"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+@media (max-width: 445px){
+    .like-comment{
+        gap: 13px;
+    }
+}
+@media (max-width: 405px) {
+    .delete-section span,.share-section span {
+        display: none;
+    }
+    .like-comment{
+        gap: 25px;
+    }
+}
+
+@media (max-width: 315px){
+    .comment-section span{
+        display: none;
+    }
+}
