@@ -62,10 +62,15 @@ const UploadPost = () => {
             formData.append("upload_preset", 'stack_post');
 
             try {
+                if(file !== null){
                 let cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
                 let api = `https://api.cloudinary.com/v1_1/${cloudName}/${fileType}/upload`;
                 const res = await axios.post(api, formData);
                 dispatch(postNewPost(currentUser?.result._id, { content, userPosted: currentUser?.result.name, file: res.data }));
+            }else{
+                dispatch(postNewPost(currentUser?.result._id,{content,userPosted:currentUser?.result.name,file}))
+            }
+            setLoading(false);
                 navigate('/post');
             } catch (err) {
                 toast.error("Error in uploading post", {
@@ -114,7 +119,7 @@ const UploadPost = () => {
 
                         </>
                     }
-                    <input type="submit" value="Post" className={`new-post-btn ${loading === true ? 'post-disabled' : ''}`} />
+                    <input type="submit" accept="image/*, video/*" value="Post" className={`new-post-btn ${loading === true ? 'post-disabled' : ''}`} />
                     {
                         loading === true &&
                         <div className='loader-container'>
