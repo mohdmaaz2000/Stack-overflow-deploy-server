@@ -89,6 +89,7 @@
     background-color: #ccc;
     border: 1px solid #bfbebe;
     cursor: not-allowed;
+    transition: 0.4s;
 }
 .auth-disabled:hover{
     background-color: #bfbebe;

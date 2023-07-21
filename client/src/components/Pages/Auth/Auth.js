@@ -15,6 +15,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [optin,setOptin] = useState(false);
+  const [loading,setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,14 +45,16 @@ const Auth = () => {
         });
       }
       else {
-        // navigate(`/auth-verify?email=${email}`);
+        setLoading(true);
         dispatch(signup({ name, email, password,optin }, navigate,returnPage));
+        setLoading(false)
       }
 
     }
     else {
-      // navigate(`/auth-verify?email=${email}`);
+      setLoading(true);
       dispatch(login({ email, password }, navigate,returnPage));
+      setLoading(false);
     }
   }
   return (
@@ -99,7 +102,7 @@ const Auth = () => {
               </label>
             )
           }
-          <button type='submit' className='auth-btn'>{!isSignup ? "Login" : "Signup"}</button>
+          <button type='submit' className={`auth-btn ${loading === true ? 'auth-disabled':''}`}>{!isSignup ? "Login" : "Signup"}</button>
         </form>
         {
           isSignup && (

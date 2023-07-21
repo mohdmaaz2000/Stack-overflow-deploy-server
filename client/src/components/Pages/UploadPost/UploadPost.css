@@ -56,6 +56,20 @@
     background-color: #0086d8;
 }
 
+.post-disabled{
+    background-color: #ccc;
+    border: 1px solid #bfbebe;
+    cursor: not-allowed;
+    transition: 0.4s;
+}
+.post-disabled:hover{
+    background-color: #bfbebe;
+}
+
+.loader-container{
+    margin-left: 45%;
+}
+
 @media only screen and (max-width: 600px) {
     form {
         width: 100%;

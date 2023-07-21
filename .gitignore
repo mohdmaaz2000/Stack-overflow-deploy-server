@@ -2,3 +2,5 @@
 /.env
 /client/node_modules
 /client/.env
+/package-lock.json
+/client/package-lock.json

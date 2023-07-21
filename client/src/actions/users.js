@@ -35,9 +35,9 @@ export const updateUser = (id, userData, navigate) => async (dispatch) => {
     }
 }
 
-export const updateProfile = (id, formData,navigate) => async (dispatch) => {
+export const updateProfile = (id, result,navigate) => async (dispatch) => {
     try {
-        const { data } = await api.updateProfile(id, formData);
+        const { data } = await api.updateProfile(id, result);
         if (data.error === true) {
             toast.error(data.message, {
                 position: toast.POSITION.TOP_CENTER,

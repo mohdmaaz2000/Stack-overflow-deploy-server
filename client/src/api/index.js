@@ -22,7 +22,7 @@ export const sendMail = (MailData) => API.post('/user/resendMail',MailData);
 
 export const fetchAllUsers = () => API.get('/user/allUsers');
 export const updateUser = (id, userData) => API.patch(`/user/updateUser/${id}`, userData);
-export const updateProfile = (id, formData) => API.patch(`/user/updateProfile/${id}`, formData);
+export const updateProfile = (id, result) => API.patch(`/user/updateProfile/${id}`, {result});
 export const deleteProfile = (id) => API.patch(`/user/removeProfile/${id}`);
 export const followRequest = (id, userFollowed) => API.patch(`/user/follow/${id}`, { userFollowed });
 

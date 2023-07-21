@@ -33,7 +33,7 @@ const userSchema = new Schema({
         default: false
     },
     profilePhoto: {
-        type: String
+        type: Object,
     },
     followers: {
         type: [String]

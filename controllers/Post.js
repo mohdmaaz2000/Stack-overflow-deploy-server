@@ -14,7 +14,7 @@ const getAllPost = async (req, res) => {
 
 const postData = async (req, res) => {
     const { id: _id } = req.params;
-    const { content, userPosted } = req.body;
+    const { content, userPosted,file } = req.body;
     if (!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(404).json({ error: true, message: "Not a valid user" });
     }
@@ -28,7 +28,7 @@ const postData = async (req, res) => {
             userPostedId: _id,
             userPosted,
             content,
-            fileContent: req.file
+            fileContent: file
         });
 
         const postData = await post.save();
@@ -44,10 +44,8 @@ const deletePost = async (req, res) => {
         return res.status(404).json({ error: true, message: "Not a valid user" });
     }
     try {
-        const data = await posts.findByIdAndDelete(_id);
-        if (data.fileContent) {
-            fs.unlinkSync(`./public/UserPost/${data.fileContent.filename}`);
-        }
+        await posts.findByIdAndDelete(_id);
+        
         return res.status(200).json({ message: "Deleted Successfully" });
     } catch (error) {
         return res.status(500).json({ error: true, message: "internal server error" });

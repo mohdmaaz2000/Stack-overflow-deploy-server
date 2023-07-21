@@ -22,8 +22,7 @@ const Post = (props) => {
     const currentUser = useSelector((state) => state.currentUserReducer);
     const userLiked = data.likes.includes(currentUser?.result?._id);
     const currentProfile = users?.filter((user) => data.userPostedId === user._id)[0];
-    const fileUrl = `${process.env.REACT_APP_SERVER}/UserPost/${data?.fileContent?.filename}`;
-    const videoUrl = `${process.env.REACT_APP_SERVER}/userPost/video/${data?.fileContent?.filename}`
+    const fileUrl = data?.fileContent?.secure_url;
     const [showComment, setShowComment] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -83,7 +82,7 @@ const Post = (props) => {
                         currentProfile?.profilePhoto ?
                             <>
                                 <Link to={`/users/${currentProfile._id}`}>
-                                    <img src={`${process.env.REACT_APP_SERVER}/Profilephoto/${currentProfile?.profilePhoto}`} alt="user profile" />
+                                    <img src={currentProfile?.profilePhoto.secure_url} alt="user profile" />
                                 </Link>
                             </>
                             :
@@ -105,13 +104,13 @@ const Post = (props) => {
                         <p>{data.content}</p>
                     }
                     {
-                        data?.fileContent && data?.fileContent?.mimetype?.startsWith("image") &&
+                        data?.fileContent && data?.fileContent?.resource_type === 'image' &&
                         <div className='post-image' style={divStyle} > </div>
                     }
                     {
-                        data?.fileContent && data?.fileContent?.mimetype?.startsWith("video") &&
+                        data?.fileContent && data?.fileContent?.resource_type === 'video' &&
                         <div className='post-video'>
-                            <video src={videoUrl} width="100%" height="100%" controls></video>
+                            <video src={data?.fileContent?.secure_url} width="100%" height="100%" controls></video>
                         </div>
                     }
                 </div>

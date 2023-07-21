@@ -3,7 +3,8 @@ import { deleteProfile, updateProfile, updateUser } from '../../../actions/users
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import { ThreeDots } from 'react-loader-spinner'
+import axios from 'axios';
 
 const EditProfileForm = (props) => {
   const { currentUser, setSwitch } = props;
@@ -12,22 +13,23 @@ const EditProfileForm = (props) => {
   const [tags, setTags] = useState('');
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleEdit = (e) => {
     e.preventDefault();
     if (tags === '') {
-      dispatch(updateUser(currentUser?._id, { name, about, tags: currentUser?.tags },navigate));
+      dispatch(updateUser(currentUser?._id, { name, about, tags: currentUser?.tags }, navigate));
     }
     else {
       const tagList = tags.split(/(\s+)/).filter(function (e) { return e.trim().length > 0; });
-      dispatch(updateUser(currentUser?._id, { name, about, tags: tagList },navigate));
+      dispatch(updateUser(currentUser?._id, { name, about, tags: tagList }, navigate));
     }
     setSwitch(false);
   }
 
-  const handleImgSubmit = (e) => {
+  const handleImgSubmit = async (e) => {
     e.preventDefault();
     if (image === '') {
       toast.warning("Please upload the image first", {
@@ -35,10 +37,23 @@ const EditProfileForm = (props) => {
         theme: 'colored'
       });
     } else {
+      setLoading(true);
       let formData = new FormData();
-      formData.append('image', image);
-      dispatch(updateProfile(currentUser?._id, formData,navigate));
-      setSwitch(false);
+      formData.append("file", image);
+      formData.append("upload_preset", 'stack_profile');
+
+      try {
+        let cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
+        let api = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+        const res = await axios.post(api, formData);
+        dispatch(updateProfile(currentUser?._id, res, navigate));
+        setSwitch(false);
+      } catch (err) {
+        toast.error("Error in uploading the profile", {
+          position: toast.POSITION.TOP_CENTER,
+          theme: 'colored'
+        });
+      }
     }
   }
 
@@ -46,7 +61,8 @@ const EditProfileForm = (props) => {
     e.preventDefault();
     const del = window.confirm("Are you confirm to delete profile photo?");
     if (del) {
-      dispatch(deleteProfile(currentUser?._id,navigate));
+      dispatch(deleteProfile(currentUser?._id, navigate));
+      setLoading(false);
       setSwitch(false);
     }
   }
@@ -113,7 +129,21 @@ const EditProfileForm = (props) => {
               <button type='button' className='user-submit-btn' onClick={handleDeleteProfile} style={{ marginLeft: '5px' }}>Delete Profile Photo</button>
             </div>)
             :
-            (<input type="submit" value="Upload Profile" className='user-submit-btn' style={{ display: 'block' }} />)
+            (<input type="submit" value="Upload Profile" className={`user-submit-btn ${loading === true?'upload-disabled':''}`} style={{ display: 'block' }} />)
+        }
+        {
+          loading === true && <div className='profile-loader-container'>
+            <ThreeDots
+              height="80"
+              width="80"
+              radius="9"
+              color="#009dff"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          </div>
         }
 
       </form>

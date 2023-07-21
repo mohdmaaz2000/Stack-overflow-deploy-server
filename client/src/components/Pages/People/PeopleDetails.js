@@ -45,7 +45,7 @@ const PeopleDetails = (props) => {
                     <div className="people-details">
                         {
                             data?.profilePhoto ?
-                                <img src={`${process.env.REACT_APP_SERVER}/Profilephoto/${data.profilePhoto}`} alt="Friend 1" />
+                                <img src={data?.profilePhoto.secure_url} alt="Friend 1" />
                                 :
                                 <div style={{ marginRight: '10px' }}>
                                     <Avatar fSize="25px" py="7px" px="10px" bgColor='#009dff' radius='50%' color='white'>{data?.name?.charAt(0).toUpperCase()}</Avatar>

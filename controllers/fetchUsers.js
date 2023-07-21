@@ -42,14 +42,14 @@ const updateProfile = async (req, res) => {
     }
 
     try {
-        const photo = req.file.filename;
+        const photo = req.body.result.data;
         const data = await user.findById(_id);
         if (data === null) {
             return res.status(404).json({ error: true, message: "Account not found" })
         }
-        if (data.profilePhoto) {
-            fs.unlinkSync(`./public/Profilephoto/${data.profilePhoto}`);
-        }
+        // if (data.profilePhoto) {
+        //     fs.unlinkSync(`./public/Profilephoto/${data.profilePhoto}`);
+        // }
         const updatedata = await user.findByIdAndUpdate(_id, { $set: { 'profilePhoto': photo } }, { new: true });
         return res.status(200).json(updatedata);
     } catch (error) {
@@ -69,7 +69,6 @@ const deleteProfile = async (req, res) => {
             return res.status(404).json({ error: true, message: "Account not found" });
         }
         const data = await user.findByIdAndUpdate(_id, { $set: { 'profilePhoto': null } }, { new: true });
-        fs.unlinkSync(`./public/Profilephoto/${CurrUser.profilePhoto}`);
         return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json({ error: true, message: "Internal Server error" });

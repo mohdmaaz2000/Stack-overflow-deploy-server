@@ -95,11 +95,24 @@
     cursor: pointer;
     transition: 0.4s;
 }
-
 .user-submit-btn:hover {
     background-color: #0086d8;
 }
 
+.upload-disabled{
+    background-color: #ccc;
+    border: 1px solid #bfbebe;
+    cursor: not-allowed;
+    transition: 0.4s;
+}
+
+.upload-disabled:hover{
+    background-color: #bfbebe;
+}
+
+.profile-loader-container{
+    margin-left: 20px;
+}
 .user-cancel-btn {
     padding: 14px 10px;
     color: #0a95ff;
