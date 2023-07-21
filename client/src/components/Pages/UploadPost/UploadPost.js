@@ -77,6 +77,7 @@ const UploadPost = () => {
                     position: toast.POSITION.TOP_CENTER,
                     theme: 'colored'
                 });
+                setLoading(false);
             }
         }
     }
@@ -100,7 +101,7 @@ const UploadPost = () => {
                     </label>
                     <label htmlFor="new-post-image">
                         <h4>Image</h4>
-                        <input type="file" id="new-post-image" onChange={handleFileInputChange} />
+                        <input type="file" accept=".jpg,.png,.jpeg,.svg,.gif,.apng,.ico,.cur,.jfif,.pjpeg,.mp4,.MP4,.WebM,.Ogg" id="new-post-image" onChange={handleFileInputChange} />
                     </label>
                     {preview &&
                         <>
@@ -119,7 +120,7 @@ const UploadPost = () => {
 
                         </>
                     }
-                    <input type="submit" accept="image/*, video/*" value="Post" className={`new-post-btn ${loading === true ? 'post-disabled' : ''}`} />
+                    <input type="submit" value="Post" className={`new-post-btn ${loading === true ? 'post-disabled' : ''}`} />
                     {
                         loading === true &&
                         <div className='loader-container'>

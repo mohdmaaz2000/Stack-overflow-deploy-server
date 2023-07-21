@@ -25,7 +25,7 @@ const Comment = (props) => {
             {
                 commentUser?.profilePhoto ?
                     <Link to={`/users/${data?.userCommented}`}>
-                        <img src={`${process.env.REACT_APP_SERVER}/Profilephoto/${commentUser.profilePhoto}`} alt="User Profile" />
+                        <img src={commentUser?.profilePhoto?.secure_url} alt="User Profile" />
                     </Link>
                     :
                     <div style={{ marginRight: '15px' }}>
