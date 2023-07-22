@@ -20,6 +20,7 @@ import SharePost from '../Pages/SharePost/SharePost';
 import People from '../Pages/People/People';
 import Subscription from '../Pages/Subscription/Subscription';
 import About from '../Pages/About/About';
+import NotFound from '../Pages/NotFound/NotFound';
 
 
 const AllRoutes = () => {
@@ -42,6 +43,8 @@ const AllRoutes = () => {
         <Route exact path='/people' element={<People />} />
         <Route exact path='/subscription' element={<Subscription/>} />
         <Route exact path='/about' element={<About />} />
+
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   )

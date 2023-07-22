@@ -44,52 +44,54 @@ const ProfilePage = () => {
         <div className='home-container-1'>
             <LeftSidebar />
             <div className="home-container-2">
-                <section>
-                    <div className="user-details-container">
-                        <div className="user-details">
-                            {currentProfile?.profilePhoto ? <>
-                                <img src={currentProfile?.profilePhoto.secure_url} alt="profile" className='user-details-img' />
-                            </> :
-                                <Avatar bgColor={'purple'} color={'white'} fSize={'50px'} px={'40px'} py={'30px'}>{currentProfile?.name?.charAt(0).toUpperCase()}
-                                </Avatar>
+                { currentProfile ?
+                    <section>
+                        <div className="user-details-container">
+                            <div className="user-details">
+                                {currentProfile?.profilePhoto ? <>
+                                    <img src={currentProfile?.profilePhoto.secure_url} alt="profile" className='user-details-img' />
+                                </> :
+                                    <Avatar bgColor={'purple'} color={'white'} fSize={'50px'} px={'40px'} py={'30px'}>{currentProfile?.name?.charAt(0).toUpperCase()}
+                                    </Avatar>
 
-                            }
-                            <div className="user-name">
-                                <h1>{currentProfile?.name}</h1>
-                                <p><FontAwesomeIcon icon={faBirthdayCake} /> Joined {moment(currentProfile?.joinedOn).fromNow()}</p>
+                                }
+                                <div className="user-name">
+                                    <h1>{currentProfile?.name}</h1>
+                                    <p><FontAwesomeIcon icon={faBirthdayCake} /> Joined {moment(currentProfile?.joinedOn).fromNow()}</p>
+                                </div>
                             </div>
+                            {
+                                currentUser?.result._id === id && (
+                                    <button type="submit" onClick={() => setSwitch(true)} className='edit-profile-btn'>
+                                        <FontAwesomeIcon icon={faPen} /> Edit Profile
+                                    </button>
+                                )
+                            }
                         </div>
                         {
-                            currentUser?.result._id === id && (
-                                <button type="submit" onClick={() => setSwitch(true)} className='edit-profile-btn'>
-                                    <FontAwesomeIcon icon={faPen} /> Edit Profile
-                                </button>
-                            )
+                            currentUser?.result._id === id ? <></> :
+                                currentProfile?.followers.includes(currentUser?.result._id) ?
+                                    <>
+                                        <button className="follow-button-profile following-btn-profile" onClick={handleFollow}>Following</button></>
+                                    :
+                                    <><button className="follow-button-profile" onClick={handleFollow}>Follow</button> </>
                         }
-                    </div>
-                    {
-                        currentUser?.result._id === id ? <></> :
-                            currentProfile?.followers.includes(currentUser?.result._id) ?
-                                <>
-                                    <button className="follow-button-profile following-btn-profile" onClick={handleFollow}>Following</button></>
-                                :
-                                <><button className="follow-button-profile" onClick={handleFollow}>Follow</button> </>
-                    }
-                    <>
-                        <hr />
-                        {
-                            Switch ? (
-                                <EditProfileForm currentUser={currentUserData} setSwitch={setSwitch} />
-                            ) : (<>
-                                <ProfileBio currentProfile={currentProfile} />
-                                <ProfileList currentUser={currentUser} currentProfile={currentProfile} />
-                                {/* <UserPost currentUser={currentUser} currentProfile={currentProfile}/> */}
-                            </>
-                            )
-                        }
-                    </>
-                </section>
-
+                        <>
+                            <hr />
+                            {
+                                Switch ? (
+                                    <EditProfileForm currentUser={currentUserData} setSwitch={setSwitch} />
+                                ) : (<>
+                                    <ProfileBio currentProfile={currentProfile} />
+                                    <ProfileList currentUser={currentUser} currentProfile={currentProfile} />
+                                    {/* <UserPost currentUser={currentUser} currentProfile={currentProfile}/> */}
+                                </>
+                                )
+                            }
+                        </>
+                    </section> : 
+                    <><h2 style={{marginTop:'60px'}}>No user found</h2></>
+                }
             </div>
         </div>
     )

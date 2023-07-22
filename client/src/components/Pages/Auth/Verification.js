@@ -60,7 +60,7 @@ const Verification = () => {
                     {
                         otpSend === true &&
                         <>
-                            <label for="verification">
+                            <label htmlFor="verification">
                                 <h4>Enter otp received </h4>
                                 <input type="text" id="verification" name="verification" placeholder='Enter 6 digit otp' onChange={(e) => setOtp(e.target.value)} />
                             </label>

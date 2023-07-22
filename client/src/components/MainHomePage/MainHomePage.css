@@ -127,6 +127,9 @@
     .display-votes-ans {
         padding: 10px;
     }
+    .display-question-detail{
+        padding: 5px;
+    }
 }
 
 @media (max-width: 455px) {

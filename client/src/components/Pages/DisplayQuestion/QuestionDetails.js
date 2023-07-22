@@ -93,7 +93,7 @@ const QuestionDetails = () => {
           <>
             {
               questionList.data.filter(question => question._id === id).map(question => (
-                <div key={question._id} >
+                <div className='question-details-container-main' key={question._id} >
                   <section className='question-details-container'>
                     <h1>{question.questionTitle}</h1>
                     <div className="question-details-container-2">
