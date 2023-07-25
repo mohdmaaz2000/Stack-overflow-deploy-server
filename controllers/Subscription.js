@@ -32,7 +32,7 @@ const orders = async (req, res) => {
 const updateUserData = async (plan, userId) => {
     let dt = new Date();
     dt.setDate(dt.getDate() + 30);
-    await users.findByIdAndUpdate(userId, { $set: { plan, expirationDate: dt } });
+    await users.findByIdAndUpdate(userId, { $set: { plan, expirationDate: dt,questionsAskedToday:0} });
 }
 
 const verify = async (req, res) => {
