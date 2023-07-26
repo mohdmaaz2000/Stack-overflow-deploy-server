@@ -62,15 +62,32 @@ const UploadPost = () => {
             formData.append("upload_preset", 'stack_post');
 
             try {
-                if(file !== null){
-                let cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
-                let api = `https://api.cloudinary.com/v1_1/${cloudName}/${fileType}/upload`;
-                const res = await axios.post(api, formData);
-                dispatch(postNewPost(currentUser?.result._id, { content, userPosted: currentUser?.result.name, file: res.data }));
-            }else{
-                dispatch(postNewPost(currentUser?.result._id,{content,userPosted:currentUser?.result.name,file}))
-            }
-            setLoading(false);
+                if (file !== null) {
+                    if (fileType === 'image' && file.size > 10e6) {
+                        toast.warning("The image size should be less than 10Mb", {
+                            position: toast.POSITION.TOP_CENTER,
+                            theme: 'colored'
+                        });
+                        setLoading(false);
+                        return;
+                    }
+
+                    if (fileType === 'video' && file.size > 10e7) {
+                        toast.warning("The size of video should be less than 100Mb", {
+                            position: toast.POSITION.TOP_CENTER,
+                            theme: 'colored'
+                        });
+                        setLoading(false);
+                        return
+                    }
+                    let cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
+                    let api = `https://api.cloudinary.com/v1_1/${cloudName}/${fileType}/upload`;
+                    const res = await axios.post(api, formData);
+                    dispatch(postNewPost(currentUser?.result._id, { content, userPosted: currentUser?.result.name, file: res.data }));
+                } else {
+                    dispatch(postNewPost(currentUser?.result._id, { content, userPosted: currentUser?.result.name, file }))
+                }
+                setLoading(false);
                 navigate('/post');
             } catch (err) {
                 toast.error("Error in uploading post", {
@@ -100,7 +117,7 @@ const UploadPost = () => {
                         <textarea id="new-post-description" cols="25" rows="5" onChange={(e) => setContent(e.target.value)} onKeyPress={handleEnter}></textarea>
                     </label>
                     <label htmlFor="new-post-image">
-                        <h4>Image</h4>
+                        <h4>Image / Video</h4>
                         <input type="file" accept=".jpg,.png,.jpeg,.svg,.gif,.apng,.ico,.cur,.jfif,.pjpeg,.mp4,.MP4,.WebM,.Ogg" id="new-post-image" onChange={handleFileInputChange} />
                     </label>
                     {preview &&
